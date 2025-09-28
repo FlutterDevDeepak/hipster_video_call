@@ -27,7 +27,6 @@ class _VideoCallScreenState extends ConsumerState<VideoCallScreen> {
     super.initState();
     _params = VideoCallParams(widget.token, widget.channelName);
 
-    // Initialize with a longer delay to ensure UI is ready
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(milliseconds: 100));
       if (mounted) {
@@ -63,14 +62,12 @@ class _VideoCallScreenState extends ConsumerState<VideoCallScreen> {
     }
 
     if (state.remoteUids.isNotEmpty) {
-      // Show remote user's video when available
       return SizedBox.expand(
         child: AgoraVideoView(
           controller: VideoViewController.remote(
             rtcEngine: vm.engine!,
             canvas: VideoCanvas(
               uid: state.remoteUdId,
-              //  sourceType: VideoSourceType.videoSourceScreen,
               renderMode: RenderModeType.renderModeHidden,
             ),
             connection: RtcConnection(channelId: state.channelName),
@@ -78,7 +75,6 @@ class _VideoCallScreenState extends ConsumerState<VideoCallScreen> {
         ),
       );
     } else {
-      // Show local video when no remote users
       return SizedBox.expand(
         child: AgoraVideoView(
           controller: VideoViewController(
@@ -202,7 +198,7 @@ class _VideoCallScreenState extends ConsumerState<VideoCallScreen> {
             const SizedBox(width: 8),
             Text(
               state.isJoined
-                  ? 'Connected (${state.remoteUids.length} users)'
+                  ? 'Connected'
                   : 'Connecting...',
               style: const TextStyle(color: Colors.white, fontSize: 12),
             ),
@@ -214,8 +210,6 @@ class _VideoCallScreenState extends ConsumerState<VideoCallScreen> {
 
   @override
   void dispose() {
-    // Only call disposeEngine when permanently leaving the app
-    // For temporary navigation, just leave() is called in the button
     super.dispose();
   }
 }
