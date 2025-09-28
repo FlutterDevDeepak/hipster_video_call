@@ -18,8 +18,8 @@ final GoRouter appRouter = GoRouter(
       path: RouteName.videoCall,
       builder: (context, state) => VideoCallScreen(
         token:
-            "007eJxTYLh9WKsseMtio8zEpzFvCk+xqBXse/7/burCxFs3Dh13+pWmwJCSZmmZlJhskGKRZGKSZmJsaWCWbGlgamFuYWGeYpBm/tL/ZkZDICND0H1TZkYGCATxWRhKUotLGBgAS2wi5g==",
-        channelName: 'test',
+            "",
+        channelName: '',
       ),
     ),
     GoRoute(
